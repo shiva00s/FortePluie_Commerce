@@ -1,4 +1,4 @@
-# Environment variables (SECURITY)
+# Environment variables (SECURITY - VERY IMPORTANT)
 .env
 backend/.env
 frontend/.env

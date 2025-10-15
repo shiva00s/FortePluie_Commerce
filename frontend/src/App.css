@@ -1,0 +1,12 @@
+/* src/App.css */
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Make the app container fill the entire viewport height */
+}
+
+.main-content {
+  flex: 1; /* Allow this section to grow and fill available space */
+  overflow-y: auto; /* Make ONLY this section scrollable */
+  padding: 2rem 0; /* Add some internal padding */
+}

@@ -1,0 +1,20 @@
+/* src/components/DarkModeToggle.css */
+.dark-mode-toggle { display: flex; align-items: center; }
+.dark-mode-toggle > button {
+  font-size: 1.2rem; background: none; border: none;
+  color: #ffc107; cursor: pointer; transition: color 0.3s ease;
+}
+.dark-mode-toggle > button:last-child { color: #6c757d; }
+.toggle-track {
+  position: relative; width: 40px; height: 20px;
+  background: #4a4a4a; border-radius: 20px;
+  margin: 0 10px; cursor: pointer;
+}
+.toggle-thumb {
+  position: absolute; width: 16px; height: 16px;
+  background: white; border-radius: 50%; top: 2px;
+  left: 2px; transition: transform 0.3s ease;
+}
+/* This class is added by the library */
+.light-mode .toggle-thumb { transform: translateX(0); }
+.dark-mode .toggle-thumb { transform: translateX(20px); }

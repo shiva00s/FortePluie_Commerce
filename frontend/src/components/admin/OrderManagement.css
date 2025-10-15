@@ -1,0 +1,92 @@
+/* src/components/admin/OrderManagement.css */
+.order-management {
+  background-color: var(--bg-primary); /* Use main background for contrast */
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.order-management h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.order-filters {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+  gap: 0.5rem;
+}
+
+.order-filters button {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+.order-filters button:hover {
+  color: var(--text-primary);
+  border-color: var(--color-primary);
+}
+
+.order-filters button.active {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+th, td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+thead th {
+  background-color: var(--bg-secondary);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+tbody tr:hover {
+  background-color: var(--bg-secondary);
+}
+
+tbody td {
+  vertical-align: middle;
+}
+
+select {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+}
+
+.status-pill {
+  padding: 0.3rem 0.7rem;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+}
+/* ... status pill colors remain the same ... */
+.status-pending { background-color: #ffc107; color: #000; }
+.status-processing { background-color: #007bff; }
+.status-delivered { background-color: #28a745; }
+.status-cancelled { background-color: #dc3545; }

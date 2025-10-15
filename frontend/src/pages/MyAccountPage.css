@@ -1,0 +1,63 @@
+/* src/pages/MyAccountPage.css */
+.my-account-container {
+  padding: 2rem 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.my-account-container h1 {
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--text-primary);
+}
+
+/* This is the change: Creates a two-column grid */
+.order-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  gap: 1.5rem;
+}
+
+/* New card styling to match the site theme */
+.order-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.order-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.order-card-header h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+.order-card-body p {
+  margin: 0.5rem 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Status pill styles (reused for consistency) */
+.status-pill {
+    padding: 0.3rem 0.7rem;
+    border-radius: 12px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.8rem;
+    text-transform: capitalize;
+}
+.status-pending { background-color: #ffc107; color: #000; }
+.status-processing { background-color: #007bff; }
+.status-delivered { background-color: #28a745; }
+.status-cancelled { background-color: #dc3545; }

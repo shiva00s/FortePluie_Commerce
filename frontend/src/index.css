@@ -1,0 +1,37 @@
+/* src/index.css */
+:root {
+  --font-primary: 'Poppins', sans-serif;
+  --color-primary: #3056D3; /* The vibrant blue from the reference site */
+  --color-primary-hover: #2c4ac0;
+}
+
+/* ☀️ LIGHT THEME ☀️ */
+body.light-mode {
+  --bg-primary: #FFFFFF; /* Clean white background */
+  --bg-secondary: #F4F7FF; /* Very light blueish-gray for cards */
+  --text-primary: #090E34; /* Dark navy text */
+  --text-secondary: #637381;
+  --border-color: #E7E7E7;
+}
+
+/* 🌙 DARK THEME 🌙 */
+body.dark-mode {
+  --bg-primary: #090E34; /* The deep navy background from the reference site */
+  --bg-secondary: #1D2144; /* Slightly lighter navy for cards */
+  --text-primary: #FFFFFF; /* White text */
+  --text-secondary: #ADB5BD;
+  --border-color: #2E3358;
+}
+
+/* Global Resets */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-primary);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a { text-decoration: none; color: var(--color-primary); }
+h1, h2, h3 { color: var(--text-primary); }

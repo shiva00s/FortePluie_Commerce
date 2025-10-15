@@ -1,0 +1,19 @@
+/* src/pages/AdminDashboard.css */
+.admin-dashboard {
+  /* Use the secondary background for the main area */
+  background-color: var(--bg-secondary);
+  padding: 2rem 5%;
+}
+
+.admin-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.admin-container h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
