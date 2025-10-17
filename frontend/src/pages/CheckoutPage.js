@@ -16,7 +16,6 @@ const CheckoutPage = () => {
   const [error, setError] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
 
-  // FIX: Calculate total price using the correct nested structure
   const totalPrice = items.reduce((total, item) => total + item.quantity * item.product.price, 0).toFixed(2);
 
   const handleChange = (e) => {
@@ -39,7 +38,9 @@ const CheckoutPage = () => {
         const razorpayOrder = orderResponse.data;
 
         const options = {
-          key: process.env.REACT_APP_RAZORPAY_KEY_ID,
+          // THIS IS THE FIX: Load the key from the .env file
+          key: process.env.REACT_APP_RAZORPAY_KEY_ID, 
+          
           amount: razorpayOrder.amount,
           currency: razorpayOrder.currency,
           name: 'Fortepluie',
@@ -79,7 +80,6 @@ const CheckoutPage = () => {
       ...formData,
       total_price: totalPrice,
       razorpay_payment_id: razorpayPaymentId,
-      // FIX: Send the correct data structure for items
       items: items.map(item => ({
         product_id: item.product.id,
         quantity: item.quantity,
@@ -139,7 +139,6 @@ const CheckoutPage = () => {
           <h3>Order Summary</h3>
           {items.map(item => (
             <div key={item.id} className="summary-item">
-              {/* FIX: Display name and quantity from the correct nested object */}
               <span>{item.product.name} (x{item.quantity})</span>
               <span>₹{(item.quantity * item.product.price).toFixed(2)}</span>
             </div>
