@@ -5,7 +5,7 @@ services:
     build: ./backend
     container_name: fortepluie-backend
     volumes:
-      - media_volume:/app/media  # Mount the shared volume here
+      - media_volume:/app/media
     expose:
       - 8000
     env_file:
@@ -22,8 +22,12 @@ services:
     container_name: fortepluie-db
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    env_file:
-      - ./.env
+    environment:
+      POSTGRES_USER: ecomuser
+      POSTGRES_PASSWORD: Shiva@Saara@74482
+      POSTGRES_DB: ecomdb
+    ports:
+      - "5432:5432"
 
   nginx:
     image: nginx:stable-alpine
@@ -33,12 +37,11 @@ services:
     volumes:
       - ./frontend/build:/usr/share/nginx/html
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - media_volume:/media  # Mount the shared volume here as well
+      - media_volume:/media
     depends_on:
       - frontend
       - backend
 
-# Define the volumes at the top level
 volumes:
   postgres_data:
   media_volume:
