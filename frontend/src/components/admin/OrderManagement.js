@@ -32,11 +32,11 @@ const OrderManagement = () => {
   };
 
   // 3. This useEffect now re-runs whenever the filterStatus changes
-  useEffect(() => {
+useEffect(() => {
     if (token) {
       fetchOrders();
     }
-  }, [token, filterStatus]); // Add filterStatus as a dependency
+  }, [token, filterStatus, fetchOrders]); // Add filterStatus as a dependency
 
   const handleStatusChange = async (orderId, newStatus) => {
     try {

@@ -10,7 +10,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Securely load the secret key from environment variables
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'a-default-secret-key-for-local-dev')
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', ')&k#7=e3@#!z#9wmbzc77ep1_-uymiy-y0-1bjm^l(&4g^dz@k')
 
 # DEBUG will be False on Render (production), but True when you run locally
 DEBUG = 'RENDER' not in os.environ
@@ -69,17 +69,17 @@ DATABASES = {
     )
 }
 
-# Database configuration (reads from your .env file)
-#DATABASES = {
- #   'default': {
-  #      'ENGINE': 'django.db.backends.postgresql',
-   #     'NAME': 'fortepluie_db',
-    #    'USER': 'fortepluie_user',
-     #   'PASSWORD': os.getenv('Shiva@Saara@74482'), # Make sure to add this to your .env
-      #  'HOST': 'localhost',
-       # 'PORT': '5432',
- #}
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ecomdb',
+        'USER': 'ecomuser',
+        'PASSWORD': 'Shiva@Saara@74482',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
 
 # Static and Media files configuration
 STATIC_URL = '/static/'
