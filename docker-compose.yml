@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: ecomdb
+      POSTGRES_USER: ecomuser
+      POSTGRES_PASSWORD: examplepassword
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    command: gunicorn fortepluie_backend.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DJANGO_SETTINGS_MODULE: fortepluie_backend.settings
+      DEBUG: "False"
+      DJANGO_ALLOWED_HOSTS: "*"
+      DB_NAME: ecomdb
+      DB_USER: ecomuser
+      DB_PASSWORD: examplepassword
+      DB_HOST: db
+      DB_PORT: 5432
+
+volumes:
+  postgres_data:
