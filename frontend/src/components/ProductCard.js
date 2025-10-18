@@ -16,7 +16,13 @@ const ProductCard = ({ product }) => {
     toast.success(`${product.name} added to cart!`);
   };
 
-  const imageUrl = product.image;
+  // --- THIS IS THE FIX ---
+  // This logic checks if the image URL from the API is already a full URL.
+  // If it is, it uses it directly. If not, it builds the full URL.
+  // This prevents the "http://localhost:8000http://..." duplication.
+  const imageUrl = product.image && product.image.startsWith('http')
+    ? product.image
+    : `http://localhost:8000${product.image}`;
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },

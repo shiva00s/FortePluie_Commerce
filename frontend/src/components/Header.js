@@ -1,77 +1,84 @@
-// src/components/Header.js
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
-import { getAuthToken, setAuthToken } from '../utils/auth';
-import { useCart } from '../context/CartContext';
-import DarkModeToggle from './DarkModeToggle'
-import './Header.css'; // This is the correct import
+import { Link } from 'react-router-dom';
+import { FaBars, FaTimes } from 'react-icons/fa';
+import './Header.css';
+import { useCart } from '../context/CartContext'; // Adjust path if needed
+import logoImage from '../assets/logo.png'; // Adjust path if needed
 
 const Header = () => {
-  const [user, setUser] = useState(null);
+  // State for the mobile navigation menu (open/closed)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  // State for the theme (light/dark)
+  const [theme, setTheme] = useState('dark');
+
+  // Get the cart items from the context
   const { items } = useCart();
-  const navigate = useNavigate();
+  
+  // Calculate the total number of unique items in the cart
+  const cartItemCount = items.length;
 
-  const cartItemCount = items.reduce((count, item) => count + item.quantity, 0);
+  // Function to toggle the mobile menu
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
+  // Function to toggle the theme
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
+
+  // This hook applies the 'dark-mode' class to the body
   useEffect(() => {
-    const token = getAuthToken();
-    if (token) {
-      try {
-        const decodedUser = jwtDecode(token);
-        console.log('Decoded Token Content:', decodedUser);
-        setUser(decodedUser);
-      } catch (error) {
-        console.error("Invalid token:", error);
-        // handleLogout(); // This can be removed if logout is handled elsewhere
-      }
+    document.body.className = '';
+    if (theme === 'dark') {
+      document.body.classList.add('dark-mode');
     }
-  }, []);
+  }, [theme]);
 
-  const handleLogout = () => {
-    setAuthToken(null);
-    setUser(null);
-    navigate('/');
-    window.location.reload();
+  // Function to close the mobile menu, useful for when a link is clicked
+  const closeMobileMenu = () => {
+    setIsMenuOpen(false);
   };
 
   return (
     <header className="header">
       <div className="header-container">
-        <Link to="/" className="brand">Fortepluie</Link>
-        <nav className="navigation">
-          {user && user.is_staff ? (
-            // If the user is an admin, show these links
-            <>
-              <Link to="/admin/dashboard">Dashboard</Link>
-              <Link to="/">View Shop</Link>
-            </>
-          ) : (
-            // Otherwise, show these links for a regular user
-            <>
-              <Link to="/">Products</Link>
-              <Link to="/categories">Categories</Link>
-              <Link to="/cart">
-                Cart {cartItemCount > 0 && `(${cartItemCount})`}
-              </Link>
-            </>
-          )}
+        <Link to="/" className="logo" onClick={closeMobileMenu}>
+          <img src={logoImage} alt="Fortepluie Logo" />
+        </Link>
+
+        {/* The nav menu's class changes based on isMenuOpen state */}
+        <nav className={isMenuOpen ? 'nav-menu active' : 'nav-menu'}>
+          <Link to="/products" className="nav-link" onClick={closeMobileMenu}>Products</Link>
+          <Link to="/categories" className="nav-link" onClick={closeMobileMenu}>Categories</Link>
+          <Link to="/cart" className="nav-link cart-link" onClick={closeMobileMenu}>
+            Cart
+            {/* The badge will only appear if there are items in the cart */}
+            {cartItemCount > 0 && <span className="cart-badge">{cartItemCount}</span>}
+          </Link>
         </nav>
-        <DarkModeToggle />
-        <div className="user-auth">
-          {user ? (
-            <>
-              <span className="welcome-text">Welcome, {user.username}</span>
-              <Link to="/account">My Account</Link>
-              {user.is_staff && <Link to="/admin/dashboard">Admin</Link>}
-              <button onClick={handleLogout} className="logout-btn">Logout</button>
-            </>
-          ) : (
-            <>
-              <Link to="/login">Login</Link>
-              <Link to="/signup" className="signup-btn">Sign Up</Link>
-            </>
-          )}
+        
+        {/* Right side of the header */}
+        <div className="header-right">
+          <div className="theme-toggle">
+            <span role="img" aria-label="sun">☀️</span>
+            <label className="switch">
+              <input type="checkbox" onChange={toggleTheme} checked={theme === 'dark'} />
+              <span className="slider round"></span>
+            </label>
+            <span role="img" aria-label="moon">🌙</span>
+          </div>
+
+          <div className="auth-links">
+             <Link to="/login" className="nav-link">Login</Link>
+             <Link to="/signup" className="nav-link signup-button">Sign Up</Link>
+          </div>
+        </div>
+
+        {/* Hamburger icon for mobile */}
+        <div className="hamburger" onClick={toggleMenu}>
+          {isMenuOpen ? <FaTimes /> : <FaBars />}
         </div>
       </div>
     </header>

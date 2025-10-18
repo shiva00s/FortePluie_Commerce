@@ -1,9 +1,8 @@
-// src/pages/ProductDetailPage.js
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../api/api';
 import { useCart } from '../context/CartContext';
-import { toast } from 'react-toastify'; // 1. Import toast
+import { toast } from 'react-toastify';
 import Spinner from '../components/Spinner';
 import './ProductDetailPage.css';
 
@@ -31,7 +30,6 @@ const ProductDetailPage = () => {
   const handleAddToCart = () => {
     if (product) {
       addToCart(product);
-      // 2. Replace alert with a success toast
       toast.success(`${product.name} added to cart!`);
     }
   };
@@ -48,11 +46,18 @@ const ProductDetailPage = () => {
     return null;
   }
 
+  // --- THIS IS THE FIX ---
+  // We apply the same logic here to prevent the duplicated URL.
+  const imageUrl = product.image && product.image.startsWith('http')
+    ? product.image
+    : `http://localhost:8000${product.image}`;
+
   return (
     <div className="product-detail-container">
       <div className="product-detail-grid">
         <div className="product-detail-image">
-          <img src={product.image} alt={product.name} />
+          {/* Use the corrected imageUrl variable here */}
+          <img src={imageUrl} alt={product.name} />
         </div>
         <div className="product-detail-info">
           <h1 className="product-title">{product.name}</h1>

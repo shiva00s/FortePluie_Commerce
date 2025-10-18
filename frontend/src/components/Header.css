@@ -1,69 +1,222 @@
-/* src/components/Header.css */
+/* --- Global Theme Styles --- */
+/* These styles apply when the body has the 'dark-mode' class */
+body.dark-mode {
+  background-color: #0d1117; /* A very dark blue */
+  color: #e0e0e0;
+}
+
+/* --- Header & Container --- */
 .header {
+  background: #1a1a2e;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
-  left: 0;
-  width: 100%;
-  padding: 1.5rem 5%;
   z-index: 1000;
-  background-color: var(--bg-primary); /* Use the main background color */
-  border-bottom: 1px solid var(--border-color); /* Subtle separator */
-  transition: all 0.3s ease;
 }
 
 .header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.brand {
+/* --- Logo Styles --- */
+.logo {
   font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--text-primary);
+  font-weight: bold;
+  color: #fff;
   text-decoration: none;
 }
 
-.navigation a, .user-auth a {
-  color: var(--text-secondary);
+.logo img {
+  height: 40px; /* Adjust this value to make the logo bigger or smaller */
+  width: auto;
+  display: block; /* Removes any extra space below the image */
+}
+
+/* --- Desktop Navigation & Auth Links --- */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: #e0e0e0;
   text-decoration: none;
-  margin: 0 1rem;
-  font-weight: 500;
+  font-size: 1rem;
   transition: color 0.3s ease;
 }
 
-.navigation a:hover, .user-auth a:hover {
-  color: var(--color-primary);
+.nav-link:hover {
+  color: #00bfff;
 }
 
-.user-auth { display: flex; align-items: center; gap: 1rem; }
-.welcome-text { margin-right: 1rem; color: var(--text-secondary); }
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
 
-.signup-btn {
-  background-color: var(--color-primary);
-  color: #fff !important;
-  padding: 0.6rem 1.2rem;
+.auth-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.signup-button {
+  background-color: #007bff;
+  color: white;
+  padding: 0.5rem 1rem;
   border-radius: 5px;
-  transition: all 0.3s ease;
+  text-decoration: none;
+  transition: background-color 0.3s;
 }
 
-.signup-btn:hover {
-  background-color: var(--color-primary-hover);
+.signup-button:hover {
+  background-color: #0056b3;
+  color: white;
 }
 
-.logout-btn {
-  background: none;
-  border: 1px solid var(--text-secondary);
-  color: var(--text-secondary);
-  padding: 0.6rem 1.2rem;
-  border-radius: 5px;
-  cursor: pointer;
+/* --- Cart Badge --- */
+.cart-link {
+  position: relative;
+}
+
+.cart-badge {
+  background-color: #007bff;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  line-height: 1;
+}
+
+/* --- Theme Toggle Switch --- */
+.theme-toggle { display: flex; align-items: center; gap: 0.5rem; color: #fff; }
+.switch { position: relative; display: inline-block; width: 50px; height: 24px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
+.slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: #007bff; }
+input:checked + .slider:before { transform: translateX(26px); }
+
+/* --- Mobile Hamburger Icon --- */
+.hamburger {
+  display: none; /* Hidden on desktop */
+}
+
+/* --- Responsive Mobile Styles --- */
+@media (max-width: 992px) {
+  /* Hide the desktop nav links and right-side elements */
+  .nav-menu, .header-right {
+    display: none;
+  }
+
+  /* Show the hamburger icon */
+  .hamburger {
+    display: block;
+    font-size: 1.8rem;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  /* Styles for the mobile menu when it's open */
+  .nav-menu.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: #1a1a2e;
+    padding: 2rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* When the mobile menu is active, we also need to show the right-side elements inside it */
+  .nav-menu.active .header-right {
+    display: flex;
+    flex-direction: column; /* Stack them vertically */
+    gap: 1.5rem;
+  }
+}
+
+/* --- Base (Light Theme) Form Styles --- */
+.form-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #111;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   font-size: 1rem;
-  font-family: var(--font-primary);
-  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+  color: #333;
+  box-sizing: border-box;
 }
 
-.logout-btn:hover {
-  background-color: var(--text-secondary);
-  color: var(--bg-primary);
+.form-group input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* --- Dark Theme Form Overrides --- */
+body.dark-mode .form-container {
+  background-color: #1a1a2e;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .form-title {
+  color: #ffffff;
+}
+
+body.dark-mode .form-group label {
+  color: #a0a0a0;
+}
+
+body.dark-mode .form-group input {
+  background-color: #2c3e50;
+  border-color: #555;
+  color: #ecf0f1;
+}
+
+body.dark-mode .form-group input:focus {
+  border-color: #00bfff;
+  box-shadow: 0 0 0 2px rgba(0, 191, 255, 0.25);
 }

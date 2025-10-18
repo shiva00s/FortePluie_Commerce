@@ -9,14 +9,12 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Security/secret settings
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'dummy-insecure-dev-key')
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', ')&k#7=e3@#!z#9wmbzc77ep1_-uymiy-y0-1bjm^l(&4g^dz@k')
+DEBUG = False
 
 
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "*").split(",")
-ALLOWED_HOSTS = [
-    '31.97.61.12', 'fortepluie.com', 'www.fortepluie.com', '127.0.0.1', 'localhost'
-]
+ALLOWED_HOSTS = ['fortepluie.com', 'www.fortepluie.com', '31.97.61.12']
 EXTERNAL_HOST = os.environ.get('HOSTINGER_DOMAIN')  # set if needed
 if EXTERNAL_HOST:
     ALLOWED_HOSTS.append(EXTERNAL_HOST)
@@ -66,7 +64,7 @@ DATABASES = {
         'NAME': os.getenv('DB_NAME', 'ecomdb'),
         'USER': os.getenv('DB_USER', 'ecomuser'),
         'PASSWORD': os.getenv('DB_PASSWORD', 'Shiva@Saara@74482'),
-        'HOST': os.getenv('DB_HOST', 'localhost'),  # Use 'db' if running with docker-compose
+        'HOST': ('localhost'),  # Use 'db' if running with docker-compose
         'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
@@ -79,7 +77,12 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # CORS
-CORS_ALLOW_ALL_ORIGINS = True  # Use CORS_ALLOWED_ORIGINS in production for security
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = [
+    "https://fortepluie.com",
+    "https://www.fortepluie.com",
+]
+
 
 # REST Framework config
 REST_FRAMEWORK = {
