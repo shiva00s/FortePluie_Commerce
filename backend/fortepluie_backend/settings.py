@@ -64,7 +64,7 @@ DATABASES = {
         'NAME': os.getenv('DB_NAME', 'ecomdb'),
         'USER': os.getenv('DB_USER', 'ecomuser'),
         'PASSWORD': os.getenv('DB_PASSWORD', 'Shiva@Saara@74482'),
-        'HOST': ('localhost'),  # Use 'db' if running with docker-compose
+        'HOST': os.getenv('DB_HOST', 'db'),
         'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
